@@ -6,7 +6,7 @@ const postSchema = new Schema(
   {
     content: String,
     creatorId: [{type:Schema.Types.ObjectId, ref:'User'}],
-    picPatch: String,
+    picPath: String,
     picName: String
   
   },

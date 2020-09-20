@@ -3,7 +3,9 @@ const { NotExtended } = require('http-errors');
 const router = express.Router();
 const Post = require('../models/Post.model');
 
-router.get('/post-form', (req, res) => res.render('post-form', { title: 'App created with Ironhack generator 🚀' }));
+const fileUploader = require('../configs/cloudinary.config');
+
+router.get('/post-form', (req, res) => res.render('post/post-form', { title: 'App created with Ironhack generator 🚀' }));
 
 
 router.post('/post-form', fileUploader.single('image'), (req,res) => {
@@ -15,7 +17,11 @@ router.post('/post-form', fileUploader.single('image'), (req,res) => {
     picPath: req.file.path,
     picName
   }).then(() => {
-    res.redirect('posts');
+    res.redirect(postFromDb => {
+      'post/post-display', {
+        post: postFromDb
+      } 
+    });
   })
     .catch(error => next(error));
 })

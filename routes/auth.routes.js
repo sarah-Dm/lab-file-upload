@@ -21,8 +21,6 @@ router.get('/signup', (req, res) => res.render('auth/signup'));
 // .post() route ==> to process form data
 router.post('/signup', fileUploader.single('image'),(req, res, next) => {
   const { username, email, password } = req.body;
-
-  console.log("Req body =" + req.body)
   if (!username || !email || !password) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
     return;
